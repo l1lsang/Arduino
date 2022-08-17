@@ -1,0 +1,66 @@
+#include<Servo.h>
+Servo myservo;
+
+int pos = 0;
+const int button01 = 3;
+const int button02 = 4;
+const int button03 = 5;
+const int button04 = 6;
+const int button05 = 7;
+const int button06 = 8;
+const int button07 = 9;
+const int start_pin = 10;
+void setup(){
+  myservo.attach(11);
+  myservo.write(90);
+pinMode(3, INPUT_PULLUP);
+pinMode(4, INPUT_PULLUP);
+pinMode(5, INPUT_PULLUP);
+pinMode(6, INPUT_PULLUP);
+pinMode(7, INPUT_PULLUP);
+pinMode(8, INPUT_PULLUP);
+pinMode(9, INPUT_PULLUP);
+pinMode(10, INPUT_PULLUP);
+Serial.begin(9600);
+}
+
+void loop() {
+  int bt_value =digitalRead(start_pin);
+  Serial.println(bt_value);
+  if(!bt_value){
+    myservo.write(0);
+    int value= random(1,8);
+    Serial.println(value);
+    while(true){
+      if(value == 1 && !digitalRead(button01)){
+        myservo.write(90);
+        break;
+      }
+      else if(value == 2 && !digitalRead(button02)){
+        myservo.write(90);
+        break;
+      }
+      else if(value == 3 && !digitalRead(button03)){
+        myservo.write(90);
+        break;
+      }  
+      else if(value == 4 && !digitalRead(button04)){
+        myservo.write(90);
+        break;
+      }
+      else if(value == 5 && !digitalRead(button05)){
+        myservo.write(90);
+        break;
+      }
+      else if(value == 6 && !digitalRead(button06)){
+        myservo.write(90);
+        break;
+      }
+      else if(value == 7 && !digitalRead(button07)){
+        myservo.write(90);
+        break;
+      }
+      //delay(200);
+    }
+  }
+}
