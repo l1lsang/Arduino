@@ -1,10 +1,11 @@
+
 #include<Servo.h>
 Servo myservo;
 
 int pos = 0;
 const int button01 = 3;
 const int button02 = 4;
-const int button03 = 5;
+const int button03 = 13;
 const int button04 = 6;
 const int button05 = 7;
 const int button06 = 8;
@@ -15,13 +16,14 @@ void setup(){
   myservo.write(90);
 pinMode(3, INPUT_PULLUP);
 pinMode(4, INPUT_PULLUP);
-pinMode(5, INPUT_PULLUP);
+pinMode(13, INPUT_PULLUP);
 pinMode(6, INPUT_PULLUP);
 pinMode(7, INPUT_PULLUP);
 pinMode(8, INPUT_PULLUP);
 pinMode(9, INPUT_PULLUP);
 pinMode(10, INPUT_PULLUP);
 Serial.begin(9600);
+randomSeed(analogRead(0));
 }
 
 void loop() {
@@ -29,7 +31,7 @@ void loop() {
   Serial.println(bt_value);
   if(!bt_value){
     myservo.write(0);
-    int value= random(1,8);
+    int value= random(1,7);
     Serial.println(value);
     while(true){
       if(value == 1 && !digitalRead(button01)){
@@ -60,7 +62,6 @@ void loop() {
         myservo.write(90);
         break;
       }
-      //delay(200);
     }
   }
 }
