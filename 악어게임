@@ -1,6 +1,6 @@
 #include<Servo.h>
 Servo myservo;
-int melody[] = {262, 330, 392}
+int melody[] = {262, 330, 392};
 int pos = 0;
 const int button01 = 3;
 const int button02 = 4;
@@ -35,68 +35,41 @@ void loop() {
     while(true){
       if(value == 1 && !digitalRead(button01)){
         myservo.write(90);
-      else
-        for(int i = 0; i < 3; i++){
-          tone(3, melody[i], 250);
-          delay(400);
-          noTone(3)
+        playSound();
         break;
-        }
-      }
-      else if(value == 2 && !digitalRead(button02)){
+      }else if(value == 2 && !digitalRead(button02)){
         myservo.write(90);
-        else
-        for(int i = 0; i < 3; i++){
-          tone(3, melody[i], 250);
-          delay(400);
-          noTone(3)
+        playSound();
         break;
-      }
-      else if(value == 3 && !digitalRead(button03)){
+      }else if(value == 3 && !digitalRead(button03)){
         myservo.write(90);
-        else
-        for(int i = 0; i < 3; i++){
-          tone(3, melody[i], 250);
-          delay(400);
-          noTone(3)
+        playSound();
         break;
-      }  
-      else if(value == 4 && !digitalRead(button04)){
+      }else if(value == 4 && !digitalRead(button04)){
         myservo.write(90);
-        else
-        for(int i = 0; i < 3; i++){
-          tone(3, melody[i], 250);
-          delay(400);
-          noTone(3)
+        playSound();
         break;
-      }
-      else if(value == 5 && !digitalRead(button05)){
+      }else if(value == 5 && !digitalRead(button05)){
         myservo.write(90);
-        else
-        for(int i = 0; i < 3; i++){
-          tone(3, melody[i], 250);
-          delay(400);
-          noTone(3)
+        playSound();
         break;
-      }
-      else if(value == 6 && !digitalRead(button06)){
+      }else if(value == 6 && !digitalRead(button06)){
         myservo.write(90);
-        else
-        for(int i = 0; i < 3; i++){
-          tone(3, melody[i], 250);
-          delay(400);
-          noTone(3)
-        break;
-      }
-      else if(value == 7 && !digitalRead(button07)){
+        playSound();
+        break; 
+      }else if(value == 7 && !digitalRead(button07)){
         myservo.write(90);
-        else
-        for(int i = 0; i < 3; i++){
-          tone(3, melody[i], 250);
-          delay(400);
-          noTone(3)
-        break;
+        playSound();
+        break; 
       }
     }
+  }
+}
+
+void playSound(){
+  for(int i = 0; i < 3; i++){
+        tone(3, melody[i], 250);
+        delay(400);
+        noTone(3);
   }
 }
