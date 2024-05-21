@@ -1,0 +1,14 @@
+#include<Servo.h>
+Servo  myservo;
+
+void setup() {
+  Serial.begin(9600);
+  myservo.attach(9);
+}
+
+void loop() {
+  for (int a = 0; a<180; a+=1) {
+    myservo.write (a);
+    delay(240000);
+  }
+}
