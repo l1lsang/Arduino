@@ -1,0 +1,33 @@
+#include "CTBot.h"
+#include <WiFiClientSecure.h>
+#include <ArduinoJson.h>
+
+CTBot myBot;
+
+String ssid = "senWiFi_Free"; // 공유기 연결 wifi SSID. 2.4GHz 사용할 것. 5G는 연결 안됨. 
+String pass = "tnfkr2021!";   // 공유기 연결 wifi 비밀번호
+String token = "6640765289:AAGWX1c10CO4ePEUoPdWNHpLAByCycPDHA4"; // 텔레그람 봇파더로부터 부여 받은 봇토큰
+int64_t chat_id = 5601669759; // 대화 ID (텔레그램에서 얻을 수 있음)
+
+void setup() {
+    Serial.begin(9600);
+    Serial.println();
+    Serial.println("WiFi 연결중입니다..");
+    myBot.wifiConnect(ssid, pass);
+    delay(1000);
+
+    myBot.setTelegramToken(token);
+
+    if (myBot.testConnection()) {
+        Serial.println("연결이 잘 되었습니다.");
+        myBot.sendMessage(chat_id, "텔레그램 봇 연결이 성공적으로 완료되었습니다!");
+    } else {
+        Serial.println("연결이 잘 되지않았습니다.");
+    }
+}
+
+void loop() {
+    // 예시로 주기적으로 메시지를 보냄 (여기서는 10초마다 메시지를 보냄)
+    myBot.sendMessage(chat_id, "이것은 주기적인 메시지입니다.");
+    delay(10000); // 10초 대기
+}
