@@ -62,8 +62,8 @@ void loop() {
   if (myBot.getNewMessage(msg)) {
     Serial.println();
     Serial.println(msg.text);
-    if (msg.text.equalsIgnoreCase("water")) { 
-      myBot.sendMessage(msg.sender.id, "물을 줍니다.."); 
+    if (msg.text == "water") { 
+      myBot.sendMessage(chat_id, "물을 줍니다.."); 
       Serial.println("식물에 물을 줍니다..");
       Waterpump();
       delay(30000);
@@ -71,7 +71,7 @@ void loop() {
     else { 
 String reply;
 reply = (String)"안녕하세요? " + msg.sender.username + (String)"님, 'water' 메세지로 식물에 물을 주세요..";
-myBot.sendMessage(msg.sender.id, reply);
+myBot.sendMessage(chat_id, reply);
 Serial.println("'water' 메세지로 식물에 물을 주세요.."); 
 }
   }
