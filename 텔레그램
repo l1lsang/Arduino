@@ -66,7 +66,6 @@ void loop() {
       myBot.sendMessage(chat_id, "물을 줍니다.."); 
       Serial.println("식물에 물을 줍니다..");
       Waterpump();
-      delay(30000);
     }
     else { 
 String reply;
