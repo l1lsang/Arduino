@@ -7,7 +7,7 @@ void setup() {
 }
 
 void loop() {
-  for (int a = 0; a<180; a+=1) {
+  for (int a = 0; a<180; a+=10) {
     myservo.write (a);
     delay(240000);
   }
