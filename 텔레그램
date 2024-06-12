@@ -6,8 +6,8 @@
 #define dhttype DHT22
 DHT dht(dhtpin, dhttype);
 CTBot myBot;
-String ssid = "SK_WiFiGIGA023C_2.4G"; // 공유기 연결 wifi SSID. 2.4GHz 사용할 것. 5G는 연결 안됨. 
-String pass = "EIB27@5512";   // 공유기 연결 wifi 비밀번호
+String ssid = "senWiFi_Free"; // 공유기 연결 wifi SSID. 2.4GHz 사용할 것. 5G는 연결 안됨. 
+String pass = "tnfkr2021!";   // 공유기 연결 wifi 비밀번호
 String token = "6640765289:AAGWX1c10CO4ePEUoPdWNHpLAByCycPDHA4"; // 텔레그람 봇파더로부터 부여 받은 봇토큰
 int64_t chat_id = -1002044037502; // 대화 ID (텔레그램에서 얻을 수 있음)
 int AA = 4;
