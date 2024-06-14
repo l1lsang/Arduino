@@ -47,13 +47,8 @@ void loop() {
 
     float h = dht.readHumidity();
     float t = dht.readTemperature();
-    if (isnan(h) || isnan(t)) {
-      Serial.println("Failed to read from DHT sensor!");
-      myBot.sendMessage(chat_id, "Failed to read from DHT sensor!");
-      return;
-    }
     int v1 = analogRead(A0);
-    myBot.sendMessage(chat_id, "Humidity: " + String(h) + ", Temperature: " + String(t) + ", Soil Moisture: " + String(v1));
+    myBot.sendMessage(chat_id, "습도: " + String(h) + ", 온도: " + String(t) + ", 토양습도: " + String(v1));
 
     Serial.print("Humidity: ");
     Serial.print(h);
