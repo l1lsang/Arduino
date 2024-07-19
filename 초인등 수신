@@ -26,18 +26,26 @@ void loop() { // run over and over
       case '1': // Red
         Serial.println("Setting color to Red");
         setColor(strip.Color(255, 0, 0));
+        delay(3000);
+        setColor(strip.Color(0, 0, 0)); 
         break;
       case '2': // Green
         Serial.println("Setting color to Green");
         setColor(strip.Color(0, 255, 0));
+        delay(3000);
+        setColor(strip.Color(0, 0, 0)); 
         break;
       case '3': // Blue
         Serial.println("Setting color to Blue");
         setColor(strip.Color(0, 0, 255));
+        delay(3000);
+        setColor(strip.Color(0, 0, 0)); 
         break;
       case '4': // White
         Serial.println("Setting color to White");
         setColor(strip.Color(255, 255, 255));
+        delay(3000);
+        setColor(strip.Color(0, 0, 0)); 
         break;
       default:
         Serial.println("Invalid signal received, turning off all LEDs");
@@ -53,4 +61,3 @@ void setColor(uint32_t color) {
   }
   strip.show();
 }
-
