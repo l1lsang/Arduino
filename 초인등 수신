@@ -1,0 +1,56 @@
+#include <SoftwareSerial.h>
+#include <Adafruit_NeoPixel.h>
+
+SoftwareSerial HC06(2, 3); // RX, TX
+#define PIN 6 // DI 핀번호
+#define N_LEDS 256 // 네오픽셀 LED 갯수
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, PIN, NEO_GRB + NEO_KHZ800);
+// NEO_GRB <= 네오픽셀 타입, NEO_KHZ800 <= 클럭 주파수
+char receivedChar;
+
+void setup() {
+  Serial.begin(9600);
+  HC06.begin(9600);
+  strip.setBrightness(100); // 네오픽셀 밝기
+  strip.begin(); // 네오픽셀 시작
+}
+
+void loop() { // run over and over
+  if (HC06.available() > 0) {
+    receivedChar = HC06.read();
+    HC06.println(receivedChar);
+    Serial.print("Received: ");
+    Serial.println(receivedChar);
+    switch (receivedChar) {
+      case '1': // Red
+        Serial.println("Setting color to Red");
+        setColor(strip.Color(255, 0, 0));
+        break;
+      case '2': // Green
+        Serial.println("Setting color to Green");
+        setColor(strip.Color(0, 255, 0));
+        break;
+      case '3': // Blue
+        Serial.println("Setting color to Blue");
+        setColor(strip.Color(0, 0, 255));
+        break;
+      case '4': // White
+        Serial.println("Setting color to White");
+        setColor(strip.Color(255, 255, 255));
+        break;
+      default:
+        Serial.println("Invalid signal received, turning off all LEDs");
+        setColor(strip.Color(0, 0, 0)); // 잘못된 신호 시 모든 픽셀 끔
+        break;
+    }
+  }
+}
+
+void setColor(uint32_t color) {
+  for (int i = 0; i < N_LEDS; i++) {
+    strip.setPixelColor(i, color);
+  }
+  strip.show();
+}
+
