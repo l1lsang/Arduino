@@ -1,0 +1,57 @@
+#include <Adafruit_NeoPixel.h>
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
+
+RF24 radio(7, 8); // SPI 버스에 nRF24L01 라디오를 설정하기 위해 CE, CSN 선언.
+const byte address[6] = "00001";
+#define PIN 6 // DI 핀번호
+#define N_LEDS 256 // 네오픽셀 LED 갯수
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, PIN, NEO_GRB + NEO_KHZ800);
+// NEO_GRB <= 네오픽셀 타입, NEO_KHZ800 <= 클럭 주파수
+
+void setup() {
+  Serial.begin(9600);
+  radio.begin();
+  radio.openReadingPipe(0, address);
+  radio.setPALevel(RF24_PA_MIN);
+  strip.setBrightness(100); // 네오픽셀 밝기
+  strip.begin(); // 네오픽셀 시작
+}
+
+void loop() { // run over and over
+  if (radio.available()) {
+    char text[32] = "";
+    radio.read(&text, sizeof(text));
+    Serial.print("Received: ");
+    Serial.println(text);
+    
+    if (strcmp(text, "1") == 0) { // Red
+      Serial.println("Setting color to Red");
+      setColor(strip.Color(255, 0, 0));
+    } else if (strcmp(text, "2") == 0) { // Green
+      Serial.println("Setting color to Green");
+      setColor(strip.Color(0, 255, 0));
+    } else if (strcmp(text, "3") == 0) { // Blue
+      Serial.println("Setting color to Blue");
+      setColor(strip.Color(0, 0, 255));
+    } else if (strcmp(text, "4") == 0) { // White
+      Serial.println("Setting color to White");
+      setColor(strip.Color(255, 255, 255));
+    } else {
+      Serial.println("Invalid signal received, turning off all LEDs");
+      setColor(strip.Color(0, 0, 0)); // 잘못된 신호 시 모든 픽셀 끔
+    }
+
+    delay(3000); // 색상 유지 시간
+    setColor(strip.Color(0, 0, 0)); // 색상을 끔
+  }
+}
+
+void setColor(uint32_t color) {
+  for (int i = 0; i < N_LEDS; i++) {
+    strip.setPixelColor(i, color);
+  }
+  strip.show();
+}
