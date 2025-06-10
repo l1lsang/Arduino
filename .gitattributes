@@ -1,4 +1,2 @@
-* linguist-vendored
-*.C++ linguist-vendored=false
 demo/** linguist-documentation=false
 demo/** linguist-vendored=false
